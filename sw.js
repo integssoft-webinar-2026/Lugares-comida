@@ -7,11 +7,11 @@
 const CACHE_NAME = 'mis-lugares-v1';
 
 const STATIC_ASSETS = [
-  './',
-  './index.html',
-  './style.css',
-  './app.js',
-  './manifest.json',
+  '/Lugares-comida/',
+  '/Lugares-comida/index.html',
+  '/Lugares-comida/style.css',
+  '/Lugares-comida/app.js',
+  '/Lugares-comida/manifest.json',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
 ];
