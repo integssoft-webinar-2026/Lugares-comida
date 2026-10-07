@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Lugares de Comida</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#e85d04" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <span class="topbar-title">🗺️ Mis Lugares</span>
+    <div class="topbar-actions">
+      <input type="text" id="search-input" placeholder="Buscar lugar…" autocomplete="off" />
+      <select id="filter-type">
+        <option value="">Todos</option>
+        <option value="tacos">Tacos</option>
+        <option value="desayunos">Desayunos</option>
+        <option value="hamburguesa">Hamburguesa</option>
+        <option value="tortas">Tortas</option>
+        <option value="mariscos">Mariscos</option>
+        <option value="postres">Postres</option>
+        <option value="bebidas">Bebidas</option>
+        <option value="otro">Otro</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Floating buttons -->
+  <div class="fab-group">
+    <button class="fab fab-secondary" id="btn-list" title="Ver lista">☰</button>
+    <button class="fab fab-primary" id="btn-locate" title="Mi ubicación">📍</button>
+  </div>
+
+  <!-- Sidebar / list panel -->
+  <aside id="sidebar" class="sidebar hidden">
+    <div class="sidebar-header">
+      <span>Mis lugares (<span id="count">0</span>)</span>
+      <button id="btn-close-sidebar">✕</button>
+    </div>
+    <ul id="places-list"></ul>
+  </aside>
+
+  <!-- Add/Edit modal -->
+  <div id="modal-overlay" class="hidden">
+    <div class="modal">
+      <h2 id="modal-title">Nuevo lugar</h2>
+      <form id="place-form">
+        <input type="hidden" id="f-id" />
+        <input type="hidden" id="f-lat" />
+        <input type="hidden" id="f-lng" />
+
+        <label>Nombre / como lo conoces
+          <input type="text" id="f-name" required placeholder="El señor de los tamales" />
+        </label>
+
+        <label>Tipo de comida
+          <select id="f-type" required>
+            <option value="">-- elige --</option>
+            <option value="tacos">Tacos</option>
+            <option value="desayunos">Desayunos</option>
+            <option value="hamburguesa">Hamburguesa</option>
+            <option value="tortas">Tortas</option>
+            <option value="mariscos">Mariscos</option>
+            <option value="postres">Postres</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+
+        <label>Qué pedir / qué estuvo bueno
+          <textarea id="f-notes" rows="2" placeholder="Los de canasta de frijol…"></textarea>
+        </label>
+
+        <label>Calificación
+          <div class="stars-row" id="stars-row">
+            <span class="star" data-v="1">★</span>
+            <span class="star" data-v="2">★</span>
+            <span class="star" data-v="3">★</span>
+            <span class="star" data-v="4">★</span>
+            <span class="star" data-v="5">★</span>
+          </div>
+          <input type="hidden" id="f-rating" value="0" />
+        </label>
+
+        <label>Horario / días
+          <input type="text" id="f-schedule" placeholder="Lun–Vie 7–11am" />
+        </label>
+
+        <label>Precio aproximado
+          <input type="text" id="f-price" placeholder="$30–50 por taco" />
+        </label>
+
+        <label>Foto (opcional)
+          <input type="file" id="f-photo" accept="image/*" capture="environment" />
+          <img id="f-photo-preview" class="photo-preview hidden" alt="preview" />
+        </label>
+
+        <div class="modal-actions">
+          <button type="button" id="btn-delete" class="btn-danger hidden">Eliminar</button>
+          <button type="button" id="btn-cancel" class="btn-ghost">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
